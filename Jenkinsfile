@@ -7,10 +7,10 @@ pipeline {
                 sh 'mvn package'
             }
         }
+
         stage('dependencyTrackPublisher') {
             steps {
-                dependencyCheck additionalArguments: '', nvdCredentialsId: 'NVD-ID', odcInstallation: 'OWASP-DC'
-                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+                dependencyTrackPublisher artifact: 'target/bom.xml', projectId: 'd6fccdbb-fdf6-441b-830e-3f3225603e58', synchronous: true
             }
         }
     }
