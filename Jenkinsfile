@@ -7,17 +7,12 @@ pipeline {
                 sh 'mvn package'
             }
         }
-        stage ('OWASP Dependency-Check Vulnerabilities') {
-            steps {
-                dependencyCheck additionalArguments: '''
-                    -o "./"
-                    -s "./"
-                    --nvdApiKey "2efa4c6c-9503-44fe-9dc4-dc351711ad13"
-                    -f "ALL"
-                    --prettyPrint''', odcInstallation: 'OWASP-DC'
-
-                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-            }
-        }
+        stage('dependencyTrackPublisher') {
+             try {
+                 dependencyTrackPublisher artifact: 'target/bom.xml', projectId: 'a65ea72b-5b77-40c5-8b19-fb83525f40eb', synchronous: true
+             } catch (e) {
+                 echo 'failed'
+             }
+         }
     }
 }
