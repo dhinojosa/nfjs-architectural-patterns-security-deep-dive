@@ -13,6 +13,6 @@ pipeline {
              } catch (e) {
                  echo 'failed'
              }
-         }
+        }
     }
 }
