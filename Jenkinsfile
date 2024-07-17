@@ -10,6 +10,7 @@ pipeline {
         stage('dependencyTrackPublisher') {
             steps {
                 dependencyCheck additionalArguments: '', nvdCredentialsId: 'NVD-ID', odcInstallation: 'OWASP-DC'
+                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
             }
         }
     }
