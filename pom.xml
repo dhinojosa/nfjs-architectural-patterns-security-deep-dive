@@ -2,40 +2,69 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.evolutionnext</groupId>
     <artifactId>nfjs-architectural-patterns-security</artifactId>
-    <version>1.2</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.15.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.9</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
     <build>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.2.5</version>
-                    <configuration>
-                        <argLine>--enable-preview</argLine>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.12.1</version>
-                    <configuration>
-                        <source>22</source>
-                        <target>22</target>
-                        <compilerArgs>
-                            <arg>--enable-preview</arg>
-                            <arg>-Xlint:removal</arg>
-                            <arg>-Xlint:unchecked</arg>
-                        </compilerArgs>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>3.9.1</version>
-                </plugin>
-            </plugins>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <argLine>--enable-preview</argLine>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.12.1</version>
+                <configuration>
+                    <source>21</source>
+                    <target>21</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.9.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.spdx</groupId>
+                <artifactId>spdx-maven-plugin</artifactId>
+                <!-- please check for updates on https://search.maven.org/search?q=a:spdx-maven-plugin -->
+                <version>0.6.5</version>
+                <executions>
+                    <execution>
+                        <id>build-spdx</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>createSPDX</goal>
+                        </goals>
+                        <configuration>
+                            <licenseDeclared>EFL-1.0</licenseDeclared>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- See documentation below for additional configuration -->
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
     <properties>
