@@ -1,0 +1,28 @@
+services:
+    web1:
+        build: ./web1
+        ports:
+            - "8001:8000"
+        environment:
+            - SERVER_NAME=web1
+
+    web2:
+        build: ./web2
+        ports:
+            - "8002:8000"
+        environment:
+            - SERVER_NAME=web2
+
+    web3:
+        build: ./web3
+        ports:
+            - "8003:8000"
+        environment:
+            - SERVER_NAME=web3
+
+    envoy:
+        image: envoyproxy/envoy:v1.16.0
+        ports:
+            - "8080:8080"
+        volumes:
+            - ./envoy.yaml:/etc/envoy/envoy.yaml

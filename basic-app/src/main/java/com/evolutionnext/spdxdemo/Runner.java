@@ -1,8 +1,4 @@
 
-/*
- * SPDX-License-Identifier: GPL-3.0-or-later
- */
-
 package com.evolutionnext.spdxdemo;
 
 public class Runner {

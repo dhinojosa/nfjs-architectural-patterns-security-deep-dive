@@ -43,3 +43,6 @@ gradle-app.setting
 vault_home/
 jenkins_home/
 .idea/
+/tls_basic/ca_keys/
+/tls_basic/client_keys/
+/tls_basic/server_keys/
