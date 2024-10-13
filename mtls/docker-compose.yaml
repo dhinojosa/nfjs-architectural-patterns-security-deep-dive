@@ -1,0 +1,26 @@
+services:
+    nginx_server:
+        image: nginx:latest
+        volumes:
+            - ./nginx.conf:/etc/nginx/nginx.conf
+            - ./certs/server.crt:/etc/nginx/ssl/server.crt
+            - ./certs/server.key:/etc/nginx/ssl/server.key
+            - ./certs/ca.crt:/etc/nginx/ssl/ca.crt
+        ports:
+            - "443:443"
+        networks:
+            - mynetwork
+
+    nginx_client:
+        image: curlimages/curl:latest
+        command: curl -v --cert /certs/client.crt --key /certs/client.key --cacert /certs/ca.crt https://nginx_server
+        volumes:
+            - ./certs/client.crt:/certs/client.crt
+            - ./certs/client.key:/certs/client.key
+            - ./certs/ca.crt:/certs/ca.crt
+        networks:
+            - mynetwork
+
+networks:
+    mynetwork:
+        driver: bridge

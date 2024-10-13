@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+    vault:
+        image: vault:1.13.2
+        container_name: vault
+        environment:
+            VAULT_DEV_ROOT_TOKEN_ID: "root"
+        command: "server -dev -dev-root-token-id=root"
+        ports:
+            - "8200:8200"
+        volumes:
+            - ./vault/config:/vault/config
+        cap_add:
+            - IPC_LOCK
+
+    nginx:
+        image: nginx:latest
+        container_name: nginx
+        depends_on:
+            - vault
+        volumes:
+            - ./nginx:/etc/nginx/conf.d
+            - ./certs:/etc/nginx/certs
+        ports:
+            - "8080:8080"

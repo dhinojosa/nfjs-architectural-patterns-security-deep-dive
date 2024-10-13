@@ -1,15 +1,11 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.evolutionnext</groupId>
-    <artifactId>nfjs-architectural-patterns-security</artifactId>
+    <artifactId>nfjs-architectural-patterns-security-deep-dive</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
-
-    <modules>
-        <module>basic-app</module>
-        <module>jwt-app</module>
-    </modules>
+    
     <dependencyManagement>
         <dependencies>
             <dependency>

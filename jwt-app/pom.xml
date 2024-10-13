@@ -7,7 +7,7 @@
 
     <parent>
         <groupId>com.evolutionnext</groupId>
-        <artifactId>nfjs-architectural-patterns-security</artifactId>
+        <artifactId>nfjs-architectural-patterns-security-deep-dive</artifactId>
         <version>1.0</version>
     </parent>
 
