@@ -46,3 +46,7 @@ jenkins_home/
 /tls_basic/ca_keys/
 /tls_basic/client_keys/
 /tls_basic/server_keys/
+/small-images/lib/*
+/small-images/custom-jre
+/small-images/target
+/small-images/modules.txt
