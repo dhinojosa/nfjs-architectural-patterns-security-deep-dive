@@ -10,4 +10,4 @@
 4. What do you like to do for zen?
    a. Swimming, Running, Hiking
    b. Reading, Gardening, Sewing, Kids
-   c. Board Games, Video Games, Streaming
+   c. Board Games, Video Games, Streaming Movies
