@@ -4,7 +4,9 @@ pipeline {
     stages {
         stage('Run mvn test') {
             steps {
-                sh 'mvn package'
+                dir('sbom') {
+                   sh 'mvn package'
+                }
             }
         }
 
