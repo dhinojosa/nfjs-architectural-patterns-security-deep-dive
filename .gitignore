@@ -50,3 +50,6 @@ jenkins_home/
 /small-images/custom-jre
 /small-images/target
 /small-images/modules.txt
+
+
+**/*.jks
