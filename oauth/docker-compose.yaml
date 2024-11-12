@@ -1,21 +1,19 @@
 services:
     keycloak:
+        container_name: keycloak
         image: quay.io/keycloak/keycloak:26.0.5
+        command: start-dev
         environment:
-            - KC_BOOTSTRAP_ADMIN_USERNAME=admin
-            - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
-            - KC_HEALTH_ENABLED=true
-            - KC_LOG_LEVEL=INFO
-            - KC_DB=postgres
-            - KC_DB_PASSWORD=postgres
-            - KC_DB_USERNAME=postgres
-        command: start --http-port 8082
+            KC_DB: dev-mem
+            KC_BOOTSTRAP_ADMIN_USERNAME: admin
+            KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+            KC_METRICS_ENABLED: "true"
+            KC_HEALTH_ENABLED: "true"
+            KC_PROXY_HEADERS: xforwarded
+            KC_LOG_CONSOLE_LEVEL: info
+            JAVA_OPTS_APPEND: "${JAVA_OPTS_APPEND:=-Dkeycloak.profile.feature.upload_script=enabled -Dkeycloak.profile.feature.scripts=enabled -Dkeycloak.profile.feature.account2=enabled -Dkeycloak.profile.feature.account_api=enabled}"
         ports:
-            - "8082:8082"
-            - "9000:9000"
-        depends_on:
-            - postgres
-
+            - 8080:8080
 #    spring-app:
 #        build:
 #            context: .
@@ -25,11 +23,11 @@ services:
 #            - SPRING_PROFILES_ACTIVE=default
 #        depends_on:
 #            - keycloak
-
-    postgres:
-        image: postgres:15.3
-        environment:
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=postgres
-        ports:
-            - "5432:5432"
+#
+#    postgres:
+#        image: postgres:15.3
+#        environment:
+#            - POSTGRES_USER=postgres
+#            - POSTGRES_PASSWORD=postgres
+#        ports:
+#            - "5432:5432"
