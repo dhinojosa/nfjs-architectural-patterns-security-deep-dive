@@ -56,4 +56,7 @@ jenkins_home/
 **/*.pem
 **/*.crt
 **/*.key
-
+**/*.pub
+**/*.csr
+**/*.srl
+**/id_rsa*
