@@ -1,11 +1,13 @@
 volumes:
     dependency-track:
+    jenkins_home:
+    postgres:
 
 services:
     jenkins:
         image: dhinojosa/jenkins-with-dep-track:2.452.3-lts
         volumes:
-            - ./jenkins_home:/var/jenkins_home
+            - jenkins_home:/var/jenkins_home
         ports:
             - "8080:8080"
     vault:
@@ -28,7 +30,7 @@ services:
         ports:
             - 5432:5432
         volumes:
-            - ~/apps/postgres:/var/lib/postgresql/data
+            - postgres:/var/lib/postgresql/data
         environment:
             - POSTGRES_PASSWORD=admin123
             - POSTGRES_USER=admin
@@ -36,7 +38,8 @@ services:
 
     dtrack-apiserver:
         image: dependencytrack/apiserver
-        # environment:
+        environment:
+        - SYSTEM_REQUIREMENT_CHECK_ENABLED=false
         # The Dependency-Track container can be configured using any of the
         # available configuration properties defined in:
         # https://docs.dependencytrack.org/getting-started/configuration/
@@ -93,7 +96,7 @@ services:
         # - ALPINE_HTTP_TIMEOUT_POOL=60
         #
         # Optional Cross-Origin Resource Sharing (CORS) Headers
-        # - ALPINE_CORS_ENABLED=true
+        - ALPINE_CORS_ENABLED=false
         # - ALPINE_CORS_ALLOW_ORIGIN=*
         # - ALPINE_CORS_ALLOW_METHODS=GET, POST, PUT, DELETE, OPTIONS
         # - ALPINE_CORS_ALLOW_HEADERS=Origin, Content-Type, Authorization, X-Requested-With, Content-Length, Accept, Origin, X-Api-Key, X-Total-Count, *
@@ -143,7 +146,7 @@ services:
             #   * This URL must be reachable by the browsers of your users.
             #   * The frontend container itself does NOT communicate with the API server directly, it just serves static files.
             #   * When deploying to dedicated servers, please use the external IP or domain of the API server.
-            - API_BASE_URL=http://localhost:8081
+            - API_BASE_URL=https://8081-${HOSTNAME}.${GITPOD_WORKSPACE_CLUSTER_HOST}
             # - "OIDC_ISSUER="
             # - "OIDC_CLIENT_ID="
             # - "OIDC_SCOPE="
