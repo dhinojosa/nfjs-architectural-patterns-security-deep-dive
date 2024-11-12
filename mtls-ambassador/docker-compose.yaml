@@ -1,0 +1,49 @@
+version: '3.7'
+services:
+    service_a:
+        image: nginx:latest
+        ports:
+            - "8080:80"
+        networks:
+            - envoy_network
+        volumes:
+            - ./service_a/nginx.conf:/etc/nginx/nginx.conf
+            - ./service_a/html:/usr/share/nginx/html
+
+    envoy_a:
+        image: envoyproxy/envoy:v1.22.0
+        volumes:
+            - ./envoy_a.yaml:/etc/envoy/envoy.yaml
+            - ./certs:/etc/envoy/certs
+        ports:
+            - "8443:8443"
+        networks:
+            - envoy_network
+        depends_on:
+            - service_a
+
+    service_b:
+        image: nginx:latest
+        ports:
+            - "8081:80"
+        networks:
+            - envoy_network
+        volumes:
+            - ./service_b/nginx.conf:/etc/nginx/nginx.conf
+            - ./service_b/html:/usr/share/nginx/html
+
+    envoy_b:
+        image: envoyproxy/envoy:v1.22.0
+        volumes:
+            - ./envoy_b.yaml:/etc/envoy/envoy.yaml
+            - ./certs:/etc/envoy/certs
+        ports:
+            - "8444:8443"
+        networks:
+            - envoy_network
+        depends_on:
+            - service_b
+
+networks:
+    envoy_network:
+        driver: bridge
