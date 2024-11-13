@@ -3,8 +3,11 @@ pipeline {
 
     stages {
         stage('Run mvn package') {
+        
             steps {
-                sh 'mvn package'
+                dir('sbom') {
+                   sh 'mvn package'
+                }
             }
         }
 
