@@ -11,7 +11,7 @@ services:
             KC_HEALTH_ENABLED: "true"
             KC_PROXY_HEADERS: xforwarded
             KC_LOG_CONSOLE_LEVEL: info
-            JAVA_OPTS_APPEND: "${JAVA_OPTS_APPEND:=-Dkeycloak.profile.feature.upload_script=enabled -Dkeycloak.profile.feature.scripts=enabled -Dkeycloak.profile.feature.account2=enabled -Dkeycloak.profile.feature.account_api=enabled}"
+            JAVA_OPTS_APPEND: "$${JAVA_OPTS_APPEND:=-Dkeycloak.profile.feature.upload_script=enabled -Dkeycloak.profile.feature.scripts=enabled -Dkeycloak.profile.feature.account2=enabled -Dkeycloak.profile.feature.account_api=enabled}"
         ports:
             - 8080:8080
 #    spring-app:

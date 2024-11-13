@@ -1,49 +1,49 @@
-version: '3.7'
 services:
-    service_a:
-        image: nginx:latest
-        ports:
-            - "8080:80"
-        networks:
-            - envoy_network
-        volumes:
-            - ./service_a/nginx.conf:/etc/nginx/nginx.conf
-            - ./service_a/html:/usr/share/nginx/html
+  service_a:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    networks:
+      - envoy_network
+    volumes:
+      - ./service_a/nginx.conf:/etc/nginx/nginx.conf
+      - ./service_a/html:/usr/share/nginx/html
+    depends_on:
+      - envoy_a
 
-    envoy_a:
-        image: envoyproxy/envoy:v1.22.0
-        volumes:
-            - ./envoy_a.yaml:/etc/envoy/envoy.yaml
-            - ./certs:/etc/envoy/certs
-        ports:
-            - "8443:8443"
-        networks:
-            - envoy_network
-        depends_on:
-            - service_a
+  envoy_a:
+    image: envoyproxy/envoy:v1.22.0
+    volumes:
+      - ./envoy_a.yaml:/etc/envoy/envoy.yaml
+      - ./certs:/etc/envoy/certs
+    ports:
+      - "8080:8080"   # Exposing this as a local HTTP endpoint for service_a
+      - "8443:8443"   # This is the HTTPS mTLS endpoint, used by envoy_a to connect to envoy_b
+    networks:
+      - envoy_network
 
-    service_b:
-        image: nginx:latest
-        ports:
-            - "8081:80"
-        networks:
-            - envoy_network
-        volumes:
-            - ./service_b/nginx.conf:/etc/nginx/nginx.conf
-            - ./service_b/html:/usr/share/nginx/html
+  service_b:
+    image: nginx:latest
+    ports:
+      - "8081:80"
+    networks:
+      - envoy_network
+    volumes:
+      - ./service_b/nginx.conf:/etc/nginx/nginx.conf
+      - ./service_b/html:/usr/share/nginx/html
 
-    envoy_b:
-        image: envoyproxy/envoy:v1.22.0
-        volumes:
-            - ./envoy_b.yaml:/etc/envoy/envoy.yaml
-            - ./certs:/etc/envoy/certs
-        ports:
-            - "8444:8443"
-        networks:
-            - envoy_network
-        depends_on:
-            - service_b
+  envoy_b:
+    image: envoyproxy/envoy:v1.22.0
+    volumes:
+      - ./envoy_b.yaml:/etc/envoy/certs
+      - ./certs:/etc/envoy/certs
+    ports:
+      - "8444:8444"
+    networks:
+      - envoy_network
+    depends_on:
+      - service_b
 
 networks:
-    envoy_network:
-        driver: bridge
+  envoy_network:
+    driver: bridge
