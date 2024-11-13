@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Run mvn test') {
+        stage('Run mvn package') {
             steps {
                 dir('sbom') {
                    sh 'mvn package'
