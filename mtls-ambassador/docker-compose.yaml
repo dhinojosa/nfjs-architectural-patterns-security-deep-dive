@@ -1,8 +1,6 @@
 services:
   service_a:
     image: nginx:latest
-    ports:
-      - "8080:80"
     networks:
       - envoy_network
     volumes:
@@ -17,15 +15,13 @@ services:
       - ./envoy_a.yaml:/etc/envoy/envoy.yaml
       - ./certs:/etc/envoy/certs
     ports:
-      - "8080:8080"   # Exposing this as a local HTTP endpoint for service_a
-      - "8443:8443"   # This is the HTTPS mTLS endpoint, used by envoy_a to connect to envoy_b
+      - "8080:8080"   # Optional: exposing for direct testing from the host
+      - "8443:8443"   # HTTPS mTLS endpoint to communicate with envoy_b
     networks:
       - envoy_network
 
   service_b:
     image: nginx:latest
-    ports:
-      - "8081:80"
     networks:
       - envoy_network
     volumes:
@@ -35,10 +31,10 @@ services:
   envoy_b:
     image: envoyproxy/envoy:v1.22.0
     volumes:
-      - ./envoy_b.yaml:/etc/envoy/certs
+      - ./envoy_b.yaml:/etc/envoy/envoy.yaml   # Ensure this points to the correct path
       - ./certs:/etc/envoy/certs
     ports:
-      - "8444:8444"
+      - "8444:8444"  # Optional: exposing for direct testing from the host
     networks:
       - envoy_network
     depends_on:
