@@ -60,3 +60,7 @@ jenkins_home/
 **/*.csr
 **/*.srl
 **/id_rsa*
+
+
+**/target
+**/*.class
