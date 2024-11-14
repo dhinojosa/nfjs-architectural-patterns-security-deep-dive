@@ -3,3 +3,4 @@ vscode:
   extensions:
     - ms-azuretools.vscode-docker
     - vscjava.vscode-java-pack
+    - humao.rest-client
