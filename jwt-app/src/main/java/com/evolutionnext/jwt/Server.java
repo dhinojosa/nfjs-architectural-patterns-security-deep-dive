@@ -131,7 +131,7 @@ public class Server {
         if (authHeaders == null || authHeaders.isEmpty()) {
             return null;
         }
-        String authHeader = authHeaders.getFirst();
+        String authHeader = authHeaders.get(0);
         if (authHeader.startsWith("Bearer ")) {
             return authHeader.substring(7);
         }
