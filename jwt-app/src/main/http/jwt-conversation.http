@@ -19,13 +19,11 @@ Content-Type: application/json
     "password": "password1234"
 }
 
-###
+### Get without token
 
 GET http://localhost:8000
 
-###
+### Get with token provided with the first call
 
 GET http://localhost:8000
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwiaWF0IjoxNzMxMjE4MTMzLCJleHAiOjE3MzEyMjE3MzN9.6RN0KlIW-91cxg8GEGuyBAt9Ld1PL4AQHyjeKk_PGA8NJATn2h66S3F5GhB1XoFke9nktg5JtjC6Wk0xsuz1Fw
-
-###
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwiaWF0IjoxNzMxNTkxMzY5LCJleHAiOjE3MzE1OTQ5NjksInJvbGVzIjpbImFkbWluIiwiZWRpdG9yIl19.D2W9LU-iefH4vdLybvv5__TC_ygT6FaBZzDJRibVyFMTraeOyhuReGxpUVT1nwMonrsDOtJYcfPlD_nJpKlu_w
