@@ -35,6 +35,13 @@
                 <plugin>
                     <groupId>org.cyclonedx</groupId>
                     <artifactId>cyclonedx-maven-plugin</artifactId>
+                    <configuration>
+                        <includeCompileScope>true</includeCompileScope>
+                        <includeRuntimeScope>true</includeRuntimeScope>
+                        <includeTestScope>true</includeTestScope>
+                        <includeProvidedScope>true</includeProvidedScope>
+                        <includeSystemScope>true</includeSystemScope>
+                    </configuration>
                     <executions>
                         <execution>
                             <phase>package</phase>
