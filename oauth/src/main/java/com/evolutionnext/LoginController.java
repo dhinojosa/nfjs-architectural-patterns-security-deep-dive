@@ -9,7 +9,7 @@ import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 @Controller
 public class LoginController {
 
-    private final String keycloakLogoutUri = "http://localhost:8082/realms/my-realm/protocol/openid-connect/logout";
+    // private final String keycloakLogoutUri = "http://localhost:8082/realms/my-realm/protocol/openid-connect/logout";
 
     @GetMapping("/")
     public String index() {

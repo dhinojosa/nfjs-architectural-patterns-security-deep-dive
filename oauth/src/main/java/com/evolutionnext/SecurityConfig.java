@@ -16,9 +16,9 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
+    // private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 
-    private final String keycloakLogoutUri = "http://localhost:8082/realms/my-realm/protocol/openid-connect/logout";
+    // private final String keycloakLogoutUri = "http://localhost:8082/realms/my-realm/protocol/openid-connect/logout";
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, ClientRegistrationRepository clientRegistrationRepository) throws Exception {
