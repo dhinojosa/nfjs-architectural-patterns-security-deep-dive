@@ -8,6 +8,7 @@
 2. Architecture: Monolithic or Microservice or Deep Microservice?
 3. What city time zone are you in?
 4. What do you like to do for zen?
+
    a. Swimming, Running, Hiking
 
    b. Reading, Gardening, Sewing, Kids
