@@ -47,8 +47,6 @@ public class Server {
                 logger.debug("token not found");
                 response = "No token provided. Please login.";
                 httpExchange.sendResponseHeaders(401, response.length());
-                flushResponse(httpExchange, response);
-                return;
             } else {
                 try {
                     Claims claims = Jwts.parser()
@@ -58,12 +56,12 @@ public class Server {
                         .getPayload();
                     response = String.format("Token received by %s: Claim for %s, issued at %s, expires at %s%n"
                         , serverName, claims.getSubject(), claims.getIssuedAt(), claims.getExpiration());
+                    httpExchange.sendResponseHeaders(200, response.length());
                 } catch (Exception e) {
                     response = "Invalid token";
                     httpExchange.sendResponseHeaders(401, response.length());
                 }
             }
-            httpExchange.sendResponseHeaders(200, response.length());
             flushResponse(httpExchange, response);
         }
     }
@@ -83,7 +81,7 @@ public class Server {
                 flushResponse(httpExchange, response);
                 return;
             }
-
+ 
             // Parse JSON input
             InputStream is = httpExchange.getRequestBody();
             JsonNode jsonNode = objectMapper.readTree(is);
